@@ -90,8 +90,11 @@ public class Accommodation extends TravelPlanObject {
                 && otherAccommodation.getEndDate().equals(getEndDate());
     }
 
-    public int getNumOfDays() {
-        return endDate.getValue().compareTo(startDate.getValue());
+    /**
+     * Returns the number of days between the start date and end date of the accommodation.
+     */
+    public long getNumOfDays() {
+        return WanderlustDate.numOfDaysBetween(startDate, endDate);
     }
 
     public String dateString() {

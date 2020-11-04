@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a TravelPlan's start/end date in the travel planner.
@@ -51,6 +52,13 @@ public class WanderlustDate {
             return false;
         }
     }
+
+    public static long numOfDaysBetween(WanderlustDate startDate, WanderlustDate endDate) {
+        LocalDate start = startDate.value;
+        LocalDate end = endDate.value;
+        return ChronoUnit.DAYS.between(start, end);
+    }
+
 
     public LocalDate getValue() {
         return value;

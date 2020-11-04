@@ -205,8 +205,11 @@ public class TravelPlan extends Directory implements Nameable {
                 || otherTravelPlan.getEndDate().equals(getEndDate()));
     }
 
-    public int getNumOfDays() {
-        return endDate.getValue().compareTo(startDate.getValue());
+    /**
+     * Returns the number of days between the start date and end date of the travel plan.
+     */
+    public long getNumOfDays() {
+        return WanderlustDate.numOfDaysBetween(startDate, endDate);
     }
 
     public String dateTitle() {
