@@ -53,6 +53,9 @@ public class WanderlustDate {
         }
     }
 
+    /**
+     * Returns the number of days between the given start date and end date.
+     */
     public static long numOfDaysBetween(WanderlustDate startDate, WanderlustDate endDate) {
         LocalDate start = startDate.value;
         LocalDate end = endDate.value;
