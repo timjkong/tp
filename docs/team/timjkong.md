@@ -38,33 +38,13 @@ It is written in Java, and has about 16 kLOC.
 
         - Relevant pull requests: [\#89](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/89)
 
-    - Implemented **navigation feature**
-        - What it does: Allows users to navigate to different `travelplan` or `wishlist` using the Command Line input. The Graphics User Interface will then update to the desired directory that the user navigated to.
-        - Justifications: Users will like to navigate to their desired `travelplan` or `wishlist` so that they are able to view the content in the directory on the application and plan their travel visually.
-        This enhancement improved the product significantly as it provides user a convenient and fast way to go to their desired `travelplan/wishlist`, improving users' experience.
-
-        - Highlights:
-            - This enhancement transcends across 3 components of Wanderlust: `Ui`, `Logic`, `Model`
-            - Furthermore, this enhancement required the creation of a high level component `directory` that is linked to the 4 components so that users are able to navigate between `travelplan/wishlist`.
-            This enhancement required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to architecture design of the code.
-            - This enhancement was contributed together as a team, with @lyeyixian and @jeannetoh building on the `Model` and `Ui` aspect respectively.
-        - Relevant pull requests: [\#108](), [\#100]()
-
-    - Implemented **time logic**
-        - What it does: Prevent users from entering invalid dates that does not make sense. For example, if a user have a `travelplan` from 1 December 2020 to 31 December 2020, it will be irrational for him to add an `activity` or `accommodation`
-        that is not within the range of the `travelplan`.
-        - Justifications: I decided to implement this logic to ensure the coherence of the application, so that users can have a proper `travelplan` depicting accurate dates and prevent any irrational timeline from happening in the `travelplan`.
-        This is aimed at our target users, who are travelgoers planning for trips and hence, a comprehensive and well-structured time logic is needed in the applicaiton.
-
-        - Relevant pull requests: [\#242]()
-
 - **Minor Enhancement**:
-    - Implemented **Command Line Tab Management**
-        - What it does: Allows users to switch tabs between `activity`, `accommodation` and `friend` within a `travelplan` using the Command Line input. The Graphics User Interface will then update to show the desired tab that the user wished to show.
-        - Justifications: Users will like to view their desired `travelplanobject` on the application so that they can plan any `activity`/`accommodation`/`friend` or make any changes to it.
-        While a GUI would make sense for tedious actions like editing, the command line is arguably faster for simpler actions like switching tabs. Furthermore, our target users are tech-savvy travellers who are used to command line window. Hence, I decided to implement a command line version for tab management to optimize for these users, which will help improve their user experience.
-
-        - Relevant pull requests: [\#132]()
+    - Formatted and organised exception messages for invalid inputs
+            - What it does: When a user enters an incorrect format for the command, the application responds with an exception message, providing the user with the correct format
+            for the command as well as an example.
+            - Justification: Wanderlust contains quite a few different commands and it is possible that a user may forget the correct format for certain commands. Providing them with the correct format and an example
+            will allow them to quickly correct their invalid inputs. 
+            - Relevant pull request: [\#248](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/248)
 
     - Implemented **feature for the Graphical User Interface**:
         - What it does: GUI shows the total cost of each `travelplan`. This is done by adding the cost of activities and accommodation in the `travelplan`.
@@ -73,14 +53,14 @@ It is written in Java, and has about 16 kLOC.
         - Relevant pull requests: [\#157](), [\#158]()
 
 * **Project management**:
-  * Provide direction during weekly meetings.
+  * Provide suggestions during weekly meetings.
   * Delegate tasks weekly to team members.
   * Schedule weekly meetings.
   * Create the template for the implementation aspect of developer guide.
 
 * **Enhancements to existing features**:
-  * Updated the delete feature ([\#84]())
-  * Wrote additional tests for existing features to increase coverage from 66% to 70% (Pull requests [\#84](), [\#99](), [\#100]())
+  * Updated the add feature. ([\#89](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/89))
+  * Wrote additional tests for the `add` feature.
 
 * **Documentation**:
   * User Guide:
@@ -93,5 +73,4 @@ It is written in Java, and has about 16 kLOC.
 * **Community**:
   * Total PRs reviewed: 4
   * PRs reviewed with non-trivial review comments: ([\#59](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/59)) 
-  * Contributed to forum discussions: [1](), [2](), [3](), [4]()
-  * Reported bugs and suggestions for other teams in the class: [Reported 15 Bugs in PED](https://github.com/jiaweiteo/ped/issues)
+  * Reported bugs and suggestions for other teams in the class: [Reported 6 Bugs in PED](https://github.com/timjkong/ped/issues)
