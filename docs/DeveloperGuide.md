@@ -1064,7 +1064,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Navigate**: Use the `goto` command to move between directories
 * **View**: Use the `show` command to provide a list of specified travel plan object
 
-*{More to be added}*
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
