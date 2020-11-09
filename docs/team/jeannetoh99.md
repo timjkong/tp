@@ -1,16 +1,14 @@
 ---
 layout: page
-title: Toh Xuan Ning Jeanne's Project Portfolio Page
+title: Jeanne Toh's Project Portfolio Page
 ---
-
-### Project: Wanderlust
+## Project: Wanderlust
 
 WanderLust is a desktop travel-planning application that allows users to plan their trips in a structured and efficient manner.
 It is optimised for CLI-proficient users, and comes with a GUI created with JavaFX.
 It is written in Java, and has approximately 16 kLOC. 
 This application is part of my team project for an Introduction to Software Engineering (CS2103) module taken at NUS.
-
-### Summary of Contributions
+## Summary of Contributions
 
 Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=jeannetoh99)
 
@@ -19,18 +17,12 @@ Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard
     - **What it does**: The UI is the main interface that interacts with the user. It listens to user interaction,
           executes user commands using the `Logic` component and observes changes to data in `Model`, updating
           accordingly.
-    - **Justifications**: The UI provides a clean and easy-to-read interface that allows the user to easily view and
-        manage their travel plans. Nevertheless, the command box remains CLI-based and hence is still best-suited for
-        CLI-proficient users.
     - **Highlights**:
-        - As the overall in-charge of Ui, I had to deeply understand its mechanisms and taught my teammates how it worked/ how they
-          can update it if they need to.
         - This enhancement requires in-depth knowledge of the entire architecture, especially the `Logic` and `Model` components.
-          Thus, in linking the UI, I also added and updated methods across `Logic`, `Model`, and `MainApp`, to ensure that
-          the entire application functions as expected.
+        - Added and updated methods across `Logic`, `Model`, and `MainApp`, to link the application with `Ui`.
         - Multiple rounds of experimentation and code refactoring to find the ideal way to display the 3 types of `TravelPlanObject`s
             (`Activity`, `Accommodation` and `Friend`), since JavaFX `ListView` does not take in wildcard types (e.g. `? extends TravelPlanObject`).
-            Ultimately, tab panes were introduced to display the 3 types of `TravelPlanObjects`.
+            Ultimately, tab panes were used.
         - Implemented the overall layout of the UI to meet the application's needs, and updated its styling from DarkTheme to BlueTheme.
         - Implemented auto-tabbing feature, where application automatically changes to the correct tab when specific commands are called.
     - Relevant pull requests: [\#81](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/81),
@@ -78,8 +70,7 @@ Developer Guide:
     Wishlist Package ([\#280](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/280)),
     LogicManager ([\#106](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/106)), and
     ClearCommand ([\#277](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/277))
-- Added Test Utilities which are used across all tests ([\#85](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/85),
-    [\#115](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/115))
+
 - Added Defensive code to `ShowCommand` and `DeleteCommand` classes ([\#182](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/182),
     [\#183](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/183))
 - Fixed Bugs found in PED and throughout Wanderlust (
