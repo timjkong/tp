@@ -7,8 +7,7 @@ title: Toh Xuan Ning Jeanne's Project Portfolio Page
 
 WanderLust is a desktop travel-planning application that allows users to plan their trips in a structured and efficient manner.
 It is optimised for CLI-proficient users, and comes with a GUI created with JavaFX.
-It is written in Java, and has approximately 16 kLOC.
-
+It is written in Java, and has approximately 16 kLOC. 
 This application is part of my team project for an Introduction to Software Engineering (CS2103) module taken at NUS.
 
 ### Summary of Contributions
