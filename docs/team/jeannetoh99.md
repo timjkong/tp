@@ -33,7 +33,7 @@ This application is part of my team project for an Introduction to Software Engi
             can update it if they need to.
             - Working with 3 different types of `TravelPlanObject`s -- `Activity`, `Accommodation` and `Friend` proved to be much more difficult
             than handling only 1 type (as in AB3), since use of JavaFX `ListView` does not take in wildcard types (e.g. `? extends TravelPlanObject`).
-            Thus, a lot of experimentation and refactoring was required to find the ideal way to display the 3 types of `TravelPlanObjects`. 
+            Thus, a lot of experimentation and refactoring was required to find the ideal way to display the 3 types of `TravelPlanObjects`.
             Ultimately, tab panes were introduced to display the 3 types of `TravelPlanObjects`.
             - Implemented the overall layout of the UI to meet the application's needs, and updated its styling from DarkTheme to BlueTheme.
             - Implemented auto-tabbing feature, where application automatically changes to the correct tab when specific commands are called.
@@ -46,7 +46,7 @@ This application is part of my team project for an Introduction to Software Engi
         - What it does: `Directory` is an abstract class inherited by `TravelPlan` and `Wishlist`. This abstraction facilitates
         the implementation of the navigation feature, as well as the UI, in displaying the current directory. `ObservableDirectory`
         observes the current directory, and is observed by the UI so that the UI updates accordingly.
-        - Relevant pull requests: ([\#86](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/86), [\#110](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/110))
+        - Relevant pull requests: [\#86](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/86), [\#110](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/110)
 
     - Add **TravelPlan and Wishlist Packages** in model
         - What it does: Each `TravelPlan` act as a wrapper for its list of activities, accommodations and friends.
@@ -117,7 +117,7 @@ This application is part of my team project for an Introduction to Software Engi
 * **Community**:
   * Total PRs reviewed: 31
   * PRs reviewed with non-trivial review comments:
-    [\#75](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/75)
+    [\#75](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/75),
     [\#84](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/84),
     [\#132](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/132),
     [\#135](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/135),
