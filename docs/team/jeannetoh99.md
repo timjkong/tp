@@ -39,9 +39,8 @@ Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard
         [\#286](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/286)
 
 - Implemented **Directory and ObservableDirectory**
-    - **What it does**: `Directory` is an abstract class inherited by `TravelPlan` and `Wishlist`.This abstraction facilitates
-        the implementation of the navigation feature, as well as the UI, in displaying the current directory. `ObservableDirectory`
-        observes the current directory, and is observed by the UI so that the UI updates accordingly.
+    - **What it does**: `Directory` is an abstract class inherited by `TravelPlan` and `Wishlist`. This abstraction facilitates
+        the implementation of the navigation feature. `ObservableDirectory` observes the current directory, and is observed by the UI so that the UI updates accordingly.
     - Relevant pull requests: [\#86](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/86), [\#110](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/110)
 
 - Add **TravelPlan and Wishlist Packages** in model
