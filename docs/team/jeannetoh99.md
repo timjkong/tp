@@ -8,6 +8,7 @@ WanderLust is a desktop travel-planning application that allows users to plan th
 It is optimised for CLI-proficient users, and comes with a GUI created with JavaFX.
 It is written in Java, and has approximately 16 kLOC. 
 This application is part of my team project for an Introduction to Software Engineering (CS2103) module taken at NUS.
+
 ## Summary of Contributions
 
 Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=jeannetoh99)
@@ -21,9 +22,8 @@ Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard
         - This enhancement requires in-depth knowledge of the entire architecture, especially the `Logic` and `Model` components.
         - Added and updated methods across `Logic`, `Model`, and `MainApp`, to link the application with `Ui`.
         - Multiple rounds of experimentation and code refactoring to find the ideal way to display the 3 types of `TravelPlanObject`s
-            (`Activity`, `Accommodation` and `Friend`), since JavaFX `ListView` does not take in wildcard types (e.g. `? extends TravelPlanObject`).
-            Ultimately, tab panes were used.
-        - Implemented the overall layout of the UI to meet the application's needs, and updated its styling from DarkTheme to BlueTheme.
+            since JavaFX `ListView` does not take in wildcard types. Ultimately, tab panes were used.
+        - Implemented the overall layout of the UI and updated its styling to BlueTheme.
         - Implemented auto-tabbing feature, where application automatically changes to the correct tab when specific commands are called.
     - Relevant pull requests: [\#81](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/81),
         [\#113](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/113),
@@ -31,16 +31,13 @@ Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard
         [\#286](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/286)
 
 - Implemented **Directory and ObservableDirectory**
-    - **What it does**: `Directory` is an abstract class inherited by `TravelPlan` and `Wishlist`. This abstraction facilitates
-        the implementation of the navigation feature. `ObservableDirectory` observes the current directory, and is observed by the UI so that the UI updates accordingly.
+    - **What it does**: `Directory` provides an abstraction for TravelPlan and Wishlist and facilitates the implementation
+        of the navigation feature. `ObservableDirectory` represents the current directory, and is observed by the UI for updates.
     - Relevant pull requests: [\#86](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/86), [\#110](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/110)
 
 - Add **TravelPlan and Wishlist Packages** in model
-    - **What it does**: Each `TravelPlan` act as a wrapper for its list of activities, accommodations and friends.
-        Simultaneously, `TravelPlan` is also an object with its own name, start date and end date. There can be multiple copies
-        of a `TravelPlan` within the `TravelPlanner`, each a unique object managing its own set of data, and being managed
-        by the `TravelPlanner`. `Wishlist` is similar to `TravelPlan` except there is only 1 in the entire TravelPlanner,
-        and it contains only a list of activities. It is used as a place to 'save' activities for future travels.
+    - **What it does**: Each TravelPlan has its own name, start date and end date, and wraps its own list of activities,
+        accommodations and friends. The wishlist wraps a list of pinned activities for future travels.
     - Relevant pull requests: [\#59](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/59)
 
 **Minor Enhancements**:
@@ -70,7 +67,6 @@ Developer Guide:
     Wishlist Package ([\#280](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/280)),
     LogicManager ([\#106](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/106)), and
     ClearCommand ([\#277](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/277))
-
 - Added Defensive code to `ShowCommand` and `DeleteCommand` classes ([\#182](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/182),
     [\#183](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/183))
 - Fixed Bugs found in PED and throughout Wanderlust (
