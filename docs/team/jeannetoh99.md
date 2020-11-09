@@ -21,7 +21,8 @@ Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard
           accordingly.
     - **Highlights**:
         - This enhancement requires in-depth knowledge of the entire architecture, especially the `Logic` and `Model` components.
-        - Multiple rounds of experimentation and code refactoring to find the ideal Ui layout and work around JavaFX constraints.
+        - Multiple rounds of experimentation and code refactoring to find the ideal way to display the 3 types of `TravelPlanObject`s
+            since JavaFX `ListView` does not take in wildcard types. Ultimately, tab panes were used.
         - Implemented the overall layout of the UI and updated its styling to BlueTheme.
         - Implemented auto-tabbing feature, where application automatically changes to the correct tab when specific commands are called.
 
