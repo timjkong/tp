@@ -30,6 +30,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
             - The feature will display a list of object that matches the keyword.
         - Relevant pull requests: [\#137](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/137)
         
+        
+        <div style="page-break-after: always;"></div>
 
 * **Minor Enhancements**:
     - Implemented `Friend` in model [\#54](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/54)
