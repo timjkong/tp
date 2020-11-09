@@ -7,7 +7,6 @@ title: Jeanne Toh's Project Portfolio Page
 WanderLust is a desktop travel-planning application that allows users to plan their trips in a structured and efficient manner.
 It is optimised for CLI-proficient users, and comes with a GUI created with JavaFX.
 It is written in Java, and has approximately 16 kLOC. 
-This application is part of my team project for an Introduction to Software Engineering (CS2103) module taken at NUS.
 
 ## Summary of Contributions
 
@@ -33,6 +32,8 @@ Code contributed: [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard
 - Add **TravelPlan and Wishlist Packages** in model ([\#59](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/59))
     - **What it does**: Each TravelPlan has its own name, start date and end date, and wraps its own list of activities,
         accommodations and friends. The wishlist wraps a list of pinned activities for future travels.
+
+<div style="page-break-after: always;"></div>
 
 **Minor Enhancements**:
 - Implemented WanderlustDate in model ([\#59](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/59),
