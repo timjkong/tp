@@ -30,6 +30,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
             - The feature will display a list of object that matches the keyword.
         - Relevant pull requests: [\#137](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/137)
         
+        
+        <div style="page-break-after: always;"></div>
 
 * **Minor Enhancements**:
     - Implemented `Friend` in model [\#54](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/54)
@@ -59,11 +61,11 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
     * Add images to show the UI
     
   * Developer Guide:  
-    * Added implementation details of the `edit` feature. [\256](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/256)
+    * Added implementation details of the `edit` feature. [\#256](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/256)
     * Add UML diagram for Edit feature[\#145](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/145)
-    * Add tests cases for Manual Testing Portion [\278](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/278)
-    * Add 7 use cases and glossary to DG [\45](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/45)
-    * Remove AB3 documentation [\146](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/146)
+    * Add tests cases for Manual Testing Portion [\#278](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/278)
+    * Add 7 use cases and glossary to DG [\#45](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/45)
+    * Remove AB3 documentation [\#146](https://github.com/AY2021S1-CS2103-T14-3/tp/pull/146)
     
 * **Community**:
   * Total PRs reviewed: 16
