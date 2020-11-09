@@ -1,7 +1,6 @@
 package seedu.address.logic.command.delete;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TPO;
 import static seedu.address.logic.parser.ParserUtil.FRIEND_INDEX;
 
 import java.util.List;
@@ -18,10 +17,13 @@ import seedu.address.model.friend.Friend;
  * Deletes a friend in a travel plan identified using the index from the travel plan.
  */
 public class DeleteFriendCommand extends DeleteCommand {
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the friend identified by the index number used in the displayed friend list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TPO + Friend.TPO_WORD + " 1";
+
+    public static final String COMMAND_WORD = "friend";
+
+    public static final String MESSAGE_USAGE =
+            "Delete a friend by its index in the displayed friend list using the format:\n"
+            + DeleteCommand.COMMAND_WORD + COMMAND_SEPARATOR + COMMAND_WORD + " INDEX\n"
+            + "Example: " + DeleteCommand.COMMAND_WORD + COMMAND_SEPARATOR + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_FRIEND_SUCCESS = "Deleted Friend:\n%1$s";
 
@@ -39,7 +41,13 @@ public class DeleteFriendCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<? extends TravelPlanObject> filteredFriendList = model.getFilteredFriendList();
+        List<Friend> filteredFriendList = model.getFilteredFriendList();
+
+        boolean isTravelPlan = model.isDirectoryTypeTravelPlan();
+
+        if (!isTravelPlan) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAVEL_PLAN_OBJECT_AT_WISHLIST);
+        }
 
         if (targetIndex.getZeroBased() >= filteredFriendList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FRIEND_DISPLAYED_INDEX);

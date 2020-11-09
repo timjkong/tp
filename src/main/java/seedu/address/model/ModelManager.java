@@ -143,13 +143,14 @@ public class ModelManager implements Model {
     public void addTravelPlan(TravelPlan travelPlan) {
         travelPlanner.addTravelPlan(travelPlan);
         updateFilteredTravelPlanList(PREDICATE_SHOW_ALL_TRAVEL_PLAN);
+        setDirectory(filteredTravelPlans.indexOf(travelPlan));
     }
 
     @Override
     public void setTravelPlan(TravelPlan target, TravelPlan editedTravelPlan) {
         requireAllNonNull(target, editedTravelPlan);
         travelPlanner.setTravelPlan(target, editedTravelPlan);
-        setDirectory(directoryIndex);
+        setDirectory(filteredTravelPlans.indexOf(editedTravelPlan));
     }
 
     //=========== Wishlist =============================================================
@@ -176,7 +177,7 @@ public class ModelManager implements Model {
     @Override
     public void addActivity(Activity activity, Index travelPlanIndex) {
         TravelPlan travelPlan = filteredTravelPlans.get(travelPlanIndex.getZeroBased());
-        travelPlan.add(activity);
+        travelPlan.addTpo(activity);
     }
 
     @Override
@@ -187,8 +188,13 @@ public class ModelManager implements Model {
         observableDirectory.setObservableDirectory(directory);
     }
 
-    //=========== Directory =============================================================
+    @Override
+    public void copyActivity(Activity activity, Index travelPlanIndex) {
+        Activity copiedActivity = new Activity(activity);
+        addActivity(copiedActivity, travelPlanIndex);
+    }
 
+    //=========== Directory =============================================================
 
     @Override
     public void setDirectory(int index) {
@@ -226,13 +232,13 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTravelPlanObject(TravelPlanObject tPObj) {
         requireNonNull(tPObj);
-        return directory.has(tPObj);
+        return directory.contains(tPObj);
     }
 
     @Override
     public boolean hasTravelPlanObject(TravelPlanObject tPObj, int travelPlanIndex) {
         requireNonNull(tPObj);
-        return filteredTravelPlans.get(travelPlanIndex).has(tPObj);
+        return filteredTravelPlans.get(travelPlanIndex).contains(tPObj);
     }
 
     @Override
@@ -245,14 +251,14 @@ public class ModelManager implements Model {
     @Override
     public void addTravelPlanObject(TravelPlanObject tPObj) {
         requireNonNull(tPObj);
-        directory.add(tPObj);
+        directory.addTpo(tPObj);
         observableDirectory.setObservableDirectory(directory);
     }
 
     @Override
     public void setTravelPlanObject(TravelPlanObject target, TravelPlanObject editedTravelPlanObject) {
         requireAllNonNull(target, editedTravelPlanObject);
-        directory.set(target, editedTravelPlanObject);
+        directory.setTpo(target, editedTravelPlanObject);
         observableDirectory.setObservableDirectory(directory);
     }
 
@@ -428,16 +434,7 @@ public class ModelManager implements Model {
                 || activityDateTime.isAfter(travelPlanEndDate)) {
             return false;
         }
-
         return true;
-    }
-
-
-
-    @Override
-    public void copyActivity(Activity activity, Index travelPlanIndex) {
-        Activity copiedActivity = new Activity(activity);
-        addActivity(copiedActivity, travelPlanIndex);
     }
 
     @Override

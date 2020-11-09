@@ -18,18 +18,17 @@ public class GoToCommand extends Command {
     public static final String TRAVEL_PLAN = "travelplan";
     public static final String WISHLIST = "wishlist";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Go to the wishlist directory or travel plan directory identified by the index number used in the "
-            + "displayed travel plan list.\n"
-            + "Object Type: -" + TRAVEL_PLAN + "\n"
-            + "             -" + WISHLIST + "\n"
-            + "Parameters: INDEX (must be a positive integer, not needed for wishlist)\n"
-            + "Example: " + COMMAND_WORD + " -" + TRAVEL_PLAN + " 1\n"
-            + "         " + COMMAND_WORD + " -" + WISHLIST;
+    public static final String MESSAGE_USAGE = "Go to the wishlist directory using the following command:\n"
+            + "goto -wishlist\n"
+            + "Go to the travel plan directory identified by its index number used in the "
+            + "displayed travel plan list using the following format:\n"
+            + "goto -travelplan INDEX";
 
     public static final String MESSAGE_GOTO_SUCCESS = "goto directory: %1$s";
 
     public static final int WISHLIST_DIRECTORY = -1;
+    public static final int COMMAND_TOKENS_TRAVELPLAN = 3;
+    public static final int COMMAND_TOKENS_WISHLIST = 2;
 
     private final Index targetIndex;
     private final boolean isTravelPlan;
@@ -47,14 +46,15 @@ public class GoToCommand extends Command {
      * Constructor for GoToCommand (wishlist).
      */
     public GoToCommand(boolean isTravelPlan) {
-        this.targetIndex = null;
+        // TODO: change to this because test case in GoToCommandParserTest not passing
+        //  (NullPointerException for .equals())
+        this.targetIndex = Index.fromZeroBased(0);
         this.isTravelPlan = isTravelPlan;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        assert model != null;
 
         if (isTravelPlan) {
             List<TravelPlan> lastShownList = model.getFilteredTravelPlanList();

@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.util.StringUtil.isWithinCharacterLimit;
+
+import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -25,11 +28,17 @@ public class ParserUtil {
     public static final int OBJECT_TYPE_POSITION = 1;
     public static final int INDEX_POSITION = 2;
     public static final int SORT_TYPE_POSITION = 2;
+    public static final int FIND_WORD_POSITION = 2;
 
     public static final int ACTIVITY_INDEX = 0;
     public static final int ACCOMMODATION_INDEX = 1;
     public static final int FRIEND_INDEX = 2;
     public static final int INVALID_INDEX = -1;
+
+    // For copy and move commands
+    public static final int ACTIVITY_INDEX_POSITION = 1;
+    public static final int TRAVELPLAN_INDEX_POSITION = 2;
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -55,6 +64,9 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!isWithinCharacterLimit(trimmedName, Name.CHARACTER_LIMIT)) {
+            throw new ParseException(Name.MESSAGE_NAME_EXCEEDS_CHARACTER_LIMIT);
+        }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -70,6 +82,9 @@ public class ParserUtil {
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
+        if (!isWithinCharacterLimit(trimmedLocation, Location.CHARACTER_LIMIT)) {
+            throw new ParseException(Location.MESSAGE_LOCATION_EXCEEDS_CHARACTER_LIMIT);
+        }
         if (!Location.isValidLocation(trimmedLocation)) {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
@@ -112,7 +127,8 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code activityDateTime} is invalid.
      */
-    public static WanderlustDateTime parseActivityDateTime(String activityDateTime) throws ParseException {
+    public static WanderlustDateTime parseActivityDateTime(String activityDateTime)
+            throws ParseException, DateTimeParseException {
         requireNonNull(activityDateTime);
         String trimmedActivityDateTime = activityDateTime.trim();
         if (!WanderlustDateTime.isValidWanderlustDateTime(trimmedActivityDateTime)) {
@@ -162,7 +178,7 @@ public class ParserUtil {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
         if (!WanderlustDateTime.isValidWanderlustDateTime(trimmedDateTime)) {
-            throw new ParseException(WanderlustDate.MESSAGE_CONSTRAINTS);
+            throw new ParseException(WanderlustDateTime.MESSAGE_CONSTRAINTS);
         }
         return new WanderlustDateTime(trimmedDateTime);
     }

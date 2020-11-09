@@ -1,7 +1,8 @@
 package seedu.address.logic.command.copy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.activity.Activity.MESSAGE_DUPLICATE_ACTIVITY;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_ACTIVITY;
+import static seedu.address.logic.parser.ParserUtil.ACTIVITY_INDEX;
 
 import java.util.List;
 
@@ -19,14 +20,17 @@ import seedu.address.model.travelplan.TravelPlan;
 public class MoveCommand extends Command {
     public static final String COMMAND_WORD = "move";
 
-    public static final String MESSAGE_USAGE =
-            "move: Moves the activity identified by the index number used in the wish list to the travel plan "
-                    + "identified by the index number used in the travel planner.\n"
-                    + "After moving, the activity will be deleted from the wish list."
-                    + "Parameters: INDEX (must be a positive integer)\n";
+    public static final int COMMAND_TOKENS = 3;
 
-    public static final String MESSAGE_MOVE_ACTIVITY_SUCCESS = "Moved activity:\n%1$s\nTo travel plan:\n%1$s";
-    public static final String MESSAGE_NOT_WISHLIST = "Please goto wish list before moving activities";
+
+    public static final String MESSAGE_USAGE = "Move an activity identified by its index number "
+            + "used in the wishlist to a travel plan "
+            + "identified by its index number in the travel planner using the following format:\n"
+            + "move ACTIVITY_INDEX TRAVELPLAN_INDEX\n";
+
+    public static final String MESSAGE_MOVE_ACTIVITY_SUCCESS = "Moved activity %1$s to travel plan %2$s";
+
+    public static final String MESSAGE_NOT_WISHLIST = "Please goto wishlist before moving activities";
     public static final String MESSAGE_DATE_NOT_IN_RANGE_ACTIVITY = "The activity date and time must be within the "
             + "specified travel plan's start date and end date.";
 
@@ -79,7 +83,11 @@ public class MoveCommand extends Command {
             model.copyActivity(activityToMove, travelPlanIndex);
             model.deleteActivity(activityToMove);
 
-            return new CommandResult(String.format(MESSAGE_MOVE_ACTIVITY_SUCCESS, activityToMove, travelPlan));
+            assert model.hasTravelPlanObject(activityToMove, travelPlanIndex.getZeroBased()) : "Activity was not moved";
+            assert !model.hasActivity(activityToMove) : "Activity was not deleted after moving";
+
+            return new CommandResult(String.format(MESSAGE_MOVE_ACTIVITY_SUCCESS,
+                    activityIndex.getOneBased(), travelPlanIndex.getOneBased()), ACTIVITY_INDEX);
         } else {
             throw new CommandException(MESSAGE_NOT_WISHLIST);
         }
@@ -88,7 +96,7 @@ public class MoveCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CopyCommand // instanceof handles nulls
+                || (other instanceof MoveCommand // instanceof handles nulls
                 && activityIndex.equals(((MoveCommand) other).activityIndex)
                 && travelPlanIndex.equals(((MoveCommand) other).travelPlanIndex)); // state check
     }

@@ -2,6 +2,7 @@ package seedu.address.logic.command.edit;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_ACCOMMODATION;
 import static seedu.address.logic.command.CommandTestUtil.DESC_HOME;
 import static seedu.address.logic.command.CommandTestUtil.DESC_INN;
 import static seedu.address.logic.command.CommandTestUtil.VALID_NAME_INN;
@@ -9,7 +10,6 @@ import static seedu.address.logic.command.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.command.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.command.edit.EditAccommodationCommand.MESSAGE_EDIT_ACCOMMODATION_SUCCESS;
 import static seedu.address.logic.parser.ParserUtil.ACCOMMODATION_INDEX;
-import static seedu.address.model.accommodation.Accommodation.MESSAGE_DUPLICATE_ACCOMMODATION;
 import static seedu.address.testutil.typicals.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.typicals.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.typicals.TypicalTravelPlans.getTypicalTravelPlanner;
@@ -20,13 +20,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.command.ClearCommand;
-import seedu.address.logic.command.edit.builder.EditAccommodationDescriptorBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TravelPlanner;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.accommodation.Accommodation;
+import seedu.address.testutil.EditAccommodationDescriptorBuilder;
 import seedu.address.testutil.builders.AccommodationBuilder;
+
 
 public class EditAccommodationCommandTest {
 

@@ -20,11 +20,13 @@ import seedu.address.model.friend.Friend;
 public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows the respective list of travel plan object type identified by the keyword.\n"
-            + "Parameters: travelPlanObjectType\n"
-            + "Valid keywords: '-activity', '-accommodation', '-friend'\n"
-            + "Example: " + COMMAND_WORD + " -activity";
+    public static final int COMMAND_TOKENS = 2;
+
+    public static final String MESSAGE_USAGE = "Show the list of activities/accommodations/friends in the travel plan "
+            + "in the current directory using the respective commands:\n"
+            + COMMAND_WORD + COMMAND_SEPARATOR + Activity.TPO_WORD + "\n"
+            + COMMAND_WORD + COMMAND_SEPARATOR + Accommodation.TPO_WORD + "\n"
+            + COMMAND_WORD + COMMAND_SEPARATOR + Friend.TPO_WORD + "\n";
 
     public static final String MESSAGE_SHOW_SUCCESS = "show: %1$s";
 
@@ -58,10 +60,9 @@ public class ShowCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         boolean isTravelPlan = model.isDirectoryTypeTravelPlan();
-        boolean isWishlist = !isTravelPlan;
 
-        if (isWishlist && travelPlanObjectType != ACTIVITY_INDEX) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SHOW_AT_WISHLIST);
+        if (!isTravelPlan && travelPlanObjectType != ACTIVITY_INDEX) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAVEL_PLAN_OBJECT_AT_WISHLIST);
         }
 
         if (travelPlanObjectType == INVALID_INDEX) {
@@ -73,12 +74,15 @@ public class ShowCommand extends Command {
         case Activity.TPO_WORD:
             model.updateFilteredActivityList(Model.PREDICATE_SHOW_ALL);
             break;
+
         case Accommodation.TPO_WORD:
             model.updateFilteredAccommodationList(Model.PREDICATE_SHOW_ALL);
             break;
+
         case Friend.TPO_WORD:
             model.updateFilteredFriendList(Model.PREDICATE_SHOW_ALL);
             break;
+
         default:
             throw new CommandException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));

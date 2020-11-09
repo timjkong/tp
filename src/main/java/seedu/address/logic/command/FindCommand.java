@@ -19,18 +19,13 @@ import seedu.address.model.commons.NameContainsKeywordsPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final int COMMAND_TOKEN = 3;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all travel plan object "
+    public static final String MESSAGE_USAGE = "Find all activities/accommodations/friends "
+            + "in the travel plan/wishlist in the current directory "
             + "whose names contain any of the specified keywords (case-insensitive) "
-            + "and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: \n"
-            + "Finds activities in the current travel plan or wishlist using the format:\n"
-            + "find -activity KEYWORD [MORE_KEYWORDS]...\n\n"
-            + "Finds accommodations in the current travel plan using the format:\n"
-            + "find -accommodation KEYWORD [MORE_KEYWORDS]...\n\n"
-            + "Finds friends in the current travel plan using the format:\n"
-            + "find -friend KEYWORD [MORE_KEYWORDS]...\n";
+            + "using the following as an example:\n"
+            + "find -activity KEYWORD [MORE_KEYWORDS]";
 
     public static final String MISSING_KEYWORDS = "Please provide at least one keyword to search for";
 
@@ -58,7 +53,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!model.isDirectoryTypeTravelPlan() && this.travelPlanObjectType != 0) { //wishlist
-            throw new CommandException(Messages.WRONG_DIRECTORY);
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAVEL_PLAN_OBJECT_AT_WISHLIST);
         }
 
         String message = "";

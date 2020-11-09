@@ -1,12 +1,13 @@
 package seedu.address.logic.command.edit;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_TRAVELPLAN;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STARTANDENDDATE;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_DATE;
+import static seedu.address.commons.core.Messages.MESSAGE_TPO_OUTSIDE_EDITED_TRAVELPLAN_DATE_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.address.model.travelplan.TravelPlan.MESSAGE_DUPLICATE_TRAVELPLAN;
+import static seedu.address.model.commons.WanderlustDate.isValidStartAndEndDate;
 
 import java.util.List;
 
@@ -25,21 +26,26 @@ import seedu.address.model.travelplan.TravelPlan;
 
 /**
  * Edits an existing TravelPlan in Wanderlust.
- * A travelplan contains the field name, start date and end date
+ * A travelplan contains the parameters: name, start date and end date
  */
 public class EditTravelPlanCommand extends EditCommand {
+
     public static final String COMMAND_WORD = "travelplan";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the travel plan identified by the index number used in the displayed travel plan list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_START + "START_DATE] "
-            + "[" + PREFIX_END + "END_DATE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Trip to Japan "
-            + PREFIX_START + "2020-01-20 "
-            + PREFIX_END + " 2020-01-30";
+    public static final String MESSAGE_FORMAT = "Edit a travel plan in the travel planner "
+            + "by its index in the displayed travel plan list using the format:\n"
+            + EditCommand.COMMAND_WORD + COMMAND_SEPARATOR + COMMAND_WORD + " INDEX "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_START + WanderlustDate.FORMAT + " "
+            + PREFIX_END + WanderlustDate.FORMAT;
+
+    public static final String MESSAGE_EXAMPLE = "Example: "
+            + EditCommand.COMMAND_WORD + COMMAND_SEPARATOR + COMMAND_WORD + " 1 "
+            + PREFIX_NAME + " France "
+            + PREFIX_START + "2021-09-15 "
+            + PREFIX_END + "2021-09-30 ";
+
+    public static final String MESSAGE_USAGE = MESSAGE_FORMAT + "\n" + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_EDIT_TRAVELPLAN_SUCCESS = "Edited Travel Plan: %1$s";
 
@@ -63,7 +69,6 @@ public class EditTravelPlanCommand extends EditCommand {
         requireNonNull(model);
         List<TravelPlan> lastShownList = model.getFilteredTravelPlanList();
 
-
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TRAVELPLAN_DISPLAYED_INDEX);
         }
@@ -75,6 +80,10 @@ public class EditTravelPlanCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TRAVELPLAN);
         }
 
+        if (editedTravelPlan.hasEarlierDateObject() || editedTravelPlan.hasLaterDateObject()) {
+            throw new CommandException(MESSAGE_TPO_OUTSIDE_EDITED_TRAVELPLAN_DATE_REGION);
+        }
+
         model.setTravelPlan(travelPlanToEdit, editedTravelPlan);
         assert model.hasTravelPlan(editedTravelPlan);
         return new CommandResult(String.format(MESSAGE_EDIT_TRAVELPLAN_SUCCESS, editedTravelPlan));
@@ -83,12 +92,12 @@ public class EditTravelPlanCommand extends EditCommand {
     /**
      * Creates and returns a {@code TravelPlan} with the details of {@code travelPlanToEdit}
      *
-     * @param travelPlanToEdit         contains the old fields
+     * @param travelPlanToEdit contains the old fields
      * @param editTravelPlanDescriptor contains updated fields
      * @return TravelPlan to be updated in the travelplan list
      */
-    private static TravelPlan createEditedTravelPlan(
-            TravelPlan travelPlanToEdit, EditDescriptor editTravelPlanDescriptor) throws CommandException {
+    private static TravelPlan createEditedTravelPlan(TravelPlan travelPlanToEdit,
+                                                     EditDescriptor editTravelPlanDescriptor) throws CommandException {
         assert travelPlanToEdit != null;
 
         Name updatedName = editTravelPlanDescriptor.getName().orElse(travelPlanToEdit.getName());
@@ -96,19 +105,12 @@ public class EditTravelPlanCommand extends EditCommand {
                 .orElse(travelPlanToEdit.getStartDate());
         WanderlustDate updatedEndDate = editTravelPlanDescriptor.getEndDate().orElse(travelPlanToEdit.getEndDate());
 
-        boolean isValidDate = TravelPlan.isValidStartAndEndDate(updatedStartDate, updatedEndDate);
+        boolean isValidDate = isValidStartAndEndDate(updatedStartDate, updatedEndDate);
 
         if (!isValidDate) {
             throw new CommandException(MESSAGE_INVALID_STARTANDENDDATE);
         }
 
-        boolean isValidStartDate = TravelPlan.isStartDateAfterToday(updatedStartDate);
-
-        if (!isValidStartDate) {
-            throw new CommandException(MESSAGE_INVALID_START_DATE);
-        }
-
-        //obtain data list from original travelplan
         ActivityList activities = travelPlanToEdit.getActivityList();
         AccommodationList accommodations = travelPlanToEdit.getAccommodationList();
         FriendList friends = travelPlanToEdit.getFriendList();
