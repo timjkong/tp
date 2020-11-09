@@ -301,7 +301,7 @@ public class TravelPlan extends Directory implements Nameable {
     public boolean hasEarlierDateObject() {
         return activities.getObservableActivityList().parallelStream().filter(activity ->
                 activity.getActivityDateTime().isBefore(this.startDate)).count() > 0
-                && accommodations.getObservableAccommodationList().parallelStream().filter(accommodation ->
+                || accommodations.getObservableAccommodationList().parallelStream().filter(accommodation ->
                 accommodation.getStartDate().isBefore(this.startDate)).count() > 0;
     }
 
@@ -311,7 +311,7 @@ public class TravelPlan extends Directory implements Nameable {
     public boolean hasLaterDateObject() {
         return activities.getObservableActivityList().parallelStream().filter(activity ->
                 activity.getActivityDateTime().isAfter(this.endDate)).count() > 0
-                && accommodations.getObservableAccommodationList().parallelStream().filter(accommodation ->
+                || accommodations.getObservableAccommodationList().parallelStream().filter(accommodation ->
                 accommodation.getEndDate().isAfter(this.endDate)).count() > 0;
     }
 
