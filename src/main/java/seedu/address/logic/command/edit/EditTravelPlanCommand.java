@@ -3,6 +3,7 @@ package seedu.address.logic.command.edit;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_TRAVELPLAN;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STARTANDENDDATE;
+import static seedu.address.commons.core.Messages.MESSAGE_TPO_OUTSIDE_EDITED_TRAVELPLAN_DATE_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.command.CommandResult;
 import seedu.address.logic.command.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.accommodation.Accommodation;
 import seedu.address.model.commons.Name;
 import seedu.address.model.commons.WanderlustDate;
 import seedu.address.model.travelplan.AccommodationList;
@@ -68,16 +70,19 @@ public class EditTravelPlanCommand extends EditCommand {
         requireNonNull(model);
         List<TravelPlan> lastShownList = model.getFilteredTravelPlanList();
 
-
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TRAVELPLAN_DISPLAYED_INDEX);
         }
 
         TravelPlan travelPlanToEdit = lastShownList.get(targetIndex.getZeroBased());
         TravelPlan editedTravelPlan = createEditedTravelPlan(travelPlanToEdit, editTravelPlanDescriptor);
-
+        
         if (!travelPlanToEdit.isSameTravelPlan(editedTravelPlan) && model.hasTravelPlan(editedTravelPlan)) {
             throw new CommandException(MESSAGE_DUPLICATE_TRAVELPLAN);
+        }
+
+        if (editedTravelPlan.hasEarlierDateObject() || editedTravelPlan.hasLaterDateObject()) {
+            throw new CommandException(MESSAGE_TPO_OUTSIDE_EDITED_TRAVELPLAN_DATE_REGION);
         }
 
         model.setTravelPlan(travelPlanToEdit, editedTravelPlan);
